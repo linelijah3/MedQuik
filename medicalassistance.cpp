@@ -4,27 +4,28 @@
 #include <fstream>
 #include <chrono>
 #include "hospitalList.h"
+#include "sortingAlgos.cpp"
 using namespace std;
 
 int main() {
     hospitalList listOfHospitals;
     bool valid = false;
-    string firstSelection, secondSelection;
+    int firstSelection, secondSelection;
     cout << "Welcome to Medical Assistance's Care Rec Tool\n"
             "---------------------------------------------\n"
             "1) Print Database\n"
             "2) Exit"<<endl;
     cout << "---------------------------------------------\n";
     while (!valid) {
-        cout << "Please make a selection:" << endl;
+        cout << "Please select an option:" << endl;
         cin >> firstSelection;
-        if (firstSelection.compare("1")==0||firstSelection.compare("2")==0) {
+        if (to_string(firstSelection).compare("1")==0||to_string(firstSelection).compare("2")==0) {
             valid = true;
             break;
         }
-        cout << "Invalid selection."<<endl;
+        cout << "Invalid option."<<endl;
     }
-    if (firstSelection.compare("2")==0) {
+    if (to_string(firstSelection).compare("2")==0) {
         return 0;
     }
     fstream file("hospitals.csv");
@@ -126,26 +127,18 @@ int main() {
             "3) Timeliness\n"
             "4) Safety\n"
             "---------------------------------------------"<<endl;
-    cout << "Please make a selection:" << endl;
+    cout << "Please select an option:" << endl;
     valid = false;
     while (!valid) {
         cin >> secondSelection;
-        if (secondSelection.compare("1")==0||secondSelection.compare("2")==0||secondSelection.compare("3")==0||secondSelection.compare("4")==0) {
+        if (to_string(secondSelection).compare("1")==0||to_string(secondSelection).compare("2")==0||to_string(secondSelection).compare("3")==0||to_string(secondSelection).compare("4")==0) {
             valid = true;
             break;
         }
-        cout << "Invalid selection."<<endl;
+        cout << "Invalid option."<<endl;
     }
-    if (secondSelection.compare("1") == 0){
-        // sort by cost of care
-    }
-    else if (secondSelection.compare("2") == 0){
-        // sort by patient ratings
-    }
-    else if (secondSelection.compare("3") == 0){
-        // sort by timeliness
-    }
-    else{
-        // sort by safety
-    }
+    t1 = std::chrono::high_resolution_clock::now();
+    timsort(stateList, secondSelection);
+    t2 = std::chrono::high_resolution_clock::now();
+    cout << "Timsort took " << chrono::duration_cast<std::chrono::microseconds>(t2-t1).count() << " microseconds to sort the vector." << endl;
 }

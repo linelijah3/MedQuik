@@ -11,29 +11,29 @@ void insertionSort(vector<hospital> &list, int sortBy, int start, int end) {
         hospital keyHospital = list[i];
 		//Sort average cost of care
 		if (sortBy == 1) {
-			key = stoi(list[i].returnString("averageCost"));
-			while (j >= 0 && stoi(list[j].returnString("averageCost")) > key) {
+			key = list[i].returnAverage();
+			while (j >= 0 && list[j].returnAverage() > key) {
 				list[j + 1] = list[j];
 			}
 		}
 		//Sort by patient ratings
 		else if (sortBy == 2) {
-			key = stoi(list[i].returnString("overallrating"));
-			while (j >= 0 && stoi(list[j].returnString("overallrating")) > key) {
+			key = list[i].returnInt("overallrating");
+			while (j >= 0 && list[j].returnInt("overallrating") > key) {
 				list[j + 1] = list[j];
 			}
 		}
 		//Sort by timeliness
 		else if (sortBy == 3) {
-			key = stoi(list[i].returnString("timeliness"));
-			while (j >= 0 && stoi(list[j].returnString("timeliness")) > key) {
+			key = list[i].returnInt("timeliness");
+			while (j >= 0 && list[j].returnInt("timeliness") > key) {
 				list[j + 1] = list[j];
 			}
 		}
 		//Sort by safety
 		else if (sortBy == 4) {
-			key = stoi(list[i].returnString("safety"));
-			while (j >= 0 && stoi(list[j].returnString("safety")) > key) {
+			key = list[i].returnInt("safety");
+			while (j >= 0 && list[j].returnInt("safety") > key) {
 				list[j + 1] = list[j];
 			}
 		}
@@ -62,7 +62,7 @@ void merge(vector<hospital>& list, int left, int middle, int right, int sortBy) 
 	//Merge by average cost
 	if (sortBy == 1) {
 		while (l < lengthLeft && r < lengthRight) {
-			if (stoi(leftList[l].returnString("averageCost")) < stoi(rightList[r].returnString("averageCost"))) {
+			if (leftList[l].returnAverage() < rightList[r].returnAverage()) {
 				list[main] = leftList[l];
 				l++;
 			}
@@ -76,7 +76,7 @@ void merge(vector<hospital>& list, int left, int middle, int right, int sortBy) 
 	//Merge by patient ratings
 	else if (sortBy == 2) {
 		while (l < lengthLeft && r < lengthRight) {
-			if (stoi(leftList[l].returnString("overallrating")) < stoi(rightList[r].returnString("overallrating"))) {
+			if (leftList[l].returnInt("overallrating") < rightList[r].returnInt("overallrating")) {
 				list[main] = leftList[l];
 				l++;
 			}
@@ -90,7 +90,7 @@ void merge(vector<hospital>& list, int left, int middle, int right, int sortBy) 
 	//Merge by timeliness
 	else if (sortBy == 3) {
 		while (l < lengthLeft && r < lengthRight) {
-			if (stoi(leftList[l].returnString("timeliness")) < stoi(rightList[r].returnString("timeliness"))) {
+			if (leftList[l].returnInt("timeliness") < rightList[r].returnInt("timeliness")) {
 				list[main] = leftList[l];
 				l++;
 			}
@@ -104,7 +104,7 @@ void merge(vector<hospital>& list, int left, int middle, int right, int sortBy) 
 	//Merge by safety
 	else if (sortBy == 4) {
 		while (l < lengthLeft && r < lengthRight) {
-			if (stoi(leftList[l].returnString("safety")) < stoi(rightList[r].returnString("safety"))) {
+			if (leftList[l].returnInt("safety") < rightList[r].returnInt("safety")) {
 				list[main] = leftList[l];
 				l++;
 			}

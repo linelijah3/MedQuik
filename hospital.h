@@ -12,4 +12,6 @@ public:
     hospital(string& name, string& oldName);
     void setString(string stringData, const string& category);
     string returnString(const string& category);
+    int returnInt(const string& category);
+    double returnAverage();
 };

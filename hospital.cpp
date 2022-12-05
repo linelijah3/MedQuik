@@ -96,26 +96,31 @@ string hospital::hospital::returnString(const string& category) {
         return this->city;
     } else if (category=="facility") {
         return this->facilityType;
-    } else if (category=="overallrating") {
-        return to_string(this->ratingOverall);
     } else if (category=="state") {
         return this->state;
-    } else if (category=="heartattack") {
-        return to_string(this->heartAttackCost);
-    } else if (category=="heartfailure") {
-        return to_string(this->heartFailureCost);
-    } else if (category=="pneumonia") {
-        return to_string(this->pneumoniaCost);
-    } else if (category=="hipknee") {
-        return to_string(this->hipkneeCost);
-    } else if (category=="timeliness") {
-        return to_string(this->timelinessRating);
-    } else if (category=="safety") {
-        return to_string(this->safetyRating);
-    } else if (category=="average") {
-        return to_string(this->averageCost);
-    } else if (category=="number") {
-        return to_string(this->number);
     }
     return "";
+}
+
+int hospital::hospital::returnInt(const string& category) {
+    if (category=="overallrating") {
+        return this->ratingOverall;
+    } else if (category=="heartattack") {
+        return this->heartAttackCost;
+    } else if (category=="heartfailure") {
+        return this->heartFailureCost;
+    } else if (category=="pneumonia") {
+        return this->pneumoniaCost;
+    } else if (category=="hipknee") {
+        return this->hipkneeCost;
+    } else if (category=="timeliness") {
+        return this->timelinessRating;
+    } else if (category=="safety") {
+        return this->safetyRating;
+    } else if (category=="number") {
+        return this->number;
+    }
+}
+double hospital::hospital::returnAverage() {
+    return this->averageCost;
 }
