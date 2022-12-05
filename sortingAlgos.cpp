@@ -14,6 +14,7 @@ void insertionSort(vector<hospital> &list, int sortBy, int start, int end) {
 			key = list[i].returnAverage();
 			while (j >= 0 && list[j].returnAverage() > key) {
 				list[j + 1] = list[j];
+				j--;
 			}
 		}
 		//Sort by patient ratings
@@ -21,6 +22,7 @@ void insertionSort(vector<hospital> &list, int sortBy, int start, int end) {
 			key = list[i].returnInt("overallrating");
 			while (j >= 0 && list[j].returnInt("overallrating") > key) {
 				list[j + 1] = list[j];
+				j--;
 			}
 		}
 		//Sort by timeliness
@@ -28,6 +30,7 @@ void insertionSort(vector<hospital> &list, int sortBy, int start, int end) {
 			key = list[i].returnInt("timeliness");
 			while (j >= 0 && list[j].returnInt("timeliness") > key) {
 				list[j + 1] = list[j];
+				j--;
 			}
 		}
 		//Sort by safety
@@ -35,6 +38,7 @@ void insertionSort(vector<hospital> &list, int sortBy, int start, int end) {
 			key = list[i].returnInt("safety");
 			while (j >= 0 && list[j].returnInt("safety") > key) {
 				list[j + 1] = list[j];
+				j--;
 			}
 		}
 		list[j + 1] = keyHospital;
