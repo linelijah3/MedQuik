@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 #include <fstream>
 #include <chrono>
 #include "hospitalList.h"
@@ -134,5 +135,17 @@ int main() {
             break;
         }
         cout << "Invalid selection."<<endl;
+    }
+    if (secondSelection.compare("1") == 0){
+        // sort by cost of care
+    }
+    else if (secondSelection.compare("2") == 0){
+        // sort by patient ratings
+    }
+    else if (secondSelection.compare("3") == 0){
+        // sort by timeliness
+    }
+    else{
+        // sort by safety
     }
 }
