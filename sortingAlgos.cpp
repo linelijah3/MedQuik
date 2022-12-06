@@ -406,3 +406,13 @@ void introSort(vector<hospital>& list, int sortBy) {
 	int maxDepth = 2 * log2(list.size());
 	introsortHelp(list, sortBy, maxDepth, 0, list.size() - 1);
 }
+
+void quicksort(vector<hospital>& list, int sortBy, int start, int end) {
+	if (start >= end) {
+		return;
+	}
+
+	int pivotIndex = partition(list, sortBy, start, end);
+	quicksort(list, sortBy, start, pivotIndex - 1);
+	quicksort(list, sortBy, pivotIndex + 1, end);
+}
