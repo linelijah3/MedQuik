@@ -1,3 +1,4 @@
+
 #include "hospitalList.h"
 
 void hospitalList::setHospitalDataString(string& name, string &stringData, const string& category) {

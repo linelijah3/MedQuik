@@ -1,6 +1,6 @@
 
 #include "hospital.h"
-hospital::hospital::hospital(string& name, string& oldName) {
+hospital::hospital(string& name, string& oldName) {
     this->name = name;
     this->number = 0;
     this->oldName = oldName;
@@ -11,7 +11,7 @@ hospital::hospital::hospital(string& name, string& oldName) {
     this->ratingOverall = 0;
 //vectors are automatically empty so no need to do anything for them
 }
-hospital::hospital::hospital() {
+hospital::hospital() {
     this->name = "";
     this->number = 0;
     this->oldName = "";
@@ -21,7 +21,7 @@ hospital::hospital::hospital() {
     this->ratingOverall = 0;
 //vectors are automatically empty so no need to do anything for them
 }
-hospital::hospital::hospital(string& name, string city, string state, string facilityType, int ratingOverall, int timelessRating, int safetyRating, int heartAttackCost, int heartFailureCost, int pneumoniaCost, int hipkneeCost, double averageCost) {
+hospital::hospital(string& name, string city, string state, string facilityType, int ratingOverall, int timelessRating, int safetyRating, int heartAttackCost, int heartFailureCost, int pneumoniaCost, int hipkneeCost, double averageCost) {
     this->name = name;
     this->number = 0;
     this->city = city;
@@ -37,7 +37,7 @@ hospital::hospital::hospital(string& name, string city, string state, string fac
     this->averageCost = averageCost;
 }
 
-void hospital::hospital::setString(string stringData, const string& category) {
+void hospital::setString(string stringData, const string& category) {
     if (category=="name") {
         this->name = stringData;
     } else if (category=="city") {
@@ -104,7 +104,7 @@ void hospital::hospital::setString(string stringData, const string& category) {
     }
 }
 
-string hospital::hospital::returnString(const string& category) {
+string hospital::returnString(const string& category) {
     if (category=="name") {
         return this->name;
     } else if (category=="city") {
@@ -117,7 +117,7 @@ string hospital::hospital::returnString(const string& category) {
     return "";
 }
 
-int hospital::hospital::returnInt(const string& category) {
+int hospital::returnInt(const string& category) {
     if (category=="overallrating") {
         return this->ratingOverall;
     } else if (category=="heartattack") {
@@ -136,6 +136,6 @@ int hospital::hospital::returnInt(const string& category) {
         return this->number;
     }
 }
-double hospital::hospital::returnAverage() {
+double hospital::returnAverage() {
     return this->averageCost;
 }
