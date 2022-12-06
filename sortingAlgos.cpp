@@ -150,3 +150,259 @@ void timsort(vector<hospital>& list, int sortBy) {
 		}
 	}
 }
+
+void heapify(vector<hospital>& list, int sortBy, int size, int i) {
+	int maxVal = i;
+	int left = 2 * i + 1;
+	int right = 2 * i + 2;
+
+	//If sorting by average cost
+	if (sortBy == 1) {
+		//If left child is larger than the root
+		if (left < size && list[left].returnAverage() > list[maxVal].returnAverage()) {
+			maxVal = left;
+		}
+
+		//If right child is larger than root
+		if (right < size && list[right].returnAverage() > list[maxVal].returnAverage()) {
+			maxVal = right;
+		}
+
+		//If the root isn't the largest
+		if (maxVal != i) {
+			swap(list[i], list[maxVal]);
+			heapify(list, sortBy, size, maxVal);
+		}
+	}
+	//If sorting by patient ranking
+	else if (sortBy == 2) {
+		//If left child is larger than the root
+		if (left < size && list[left].returnInt("overallrating") > list[maxVal].returnInt("overallrating")) {
+			maxVal = left;
+		}
+
+		//If right child is larger than root
+		if (right < size && list[right].returnInt("overallrating") > list[maxVal].returnInt("overallrating")) {
+			maxVal = right;
+		}
+
+		//If the root isn't the largest
+		if (maxVal != i) {
+			swap(list[i], list[maxVal]);
+			heapify(list, sortBy, size, maxVal);
+		}
+	}
+	//If sorting by timeliness
+	if (sortBy == 3) {
+		//If left child is larger than the root
+		if (left < size && list[left].returnInt("timeliness") > list[maxVal].returnInt("timeliness")) {
+			maxVal = left;
+		}
+
+		//If right child is larger than root
+		if (right < size && list[right].returnInt("timeliness") > list[maxVal].returnInt("timeliness")) {
+			maxVal = right;
+		}
+
+		//If the root isn't the largest
+		if (maxVal != i) {
+			swap(list[i], list[maxVal]);
+			heapify(list, sortBy, size, maxVal);
+		}
+	}
+	//If sorting by safety
+	if (sortBy == 4) {
+		//If left child is larger than the root
+		if (left < size && list[left].returnInt("safety") > list[maxVal].returnInt("safety")) {
+			maxVal = left;
+		}
+
+		//If right child is larger than root
+		if (right < size && list[right].returnInt("safety") > list[maxVal].returnInt("safety")) {
+			maxVal = right;
+		}
+
+		//If the root isn't the largest
+		if (maxVal != i) {
+			swap(list[i], list[maxVal]);
+			heapify(list, sortBy, size, maxVal);
+		}
+	}
+}
+
+void heapSort(vector<hospital>& list, int sortBy, int start, int end) {
+	//Build heap in place
+	for (int i = (end - start) / 2 - 1; i >= 0; i--) {
+		heapify(list, sortBy, end - start, i);
+	}
+
+	for (int i = end - start; i >= 0; i--) {
+		swap(list[start], list[i]);
+		heapify(list, sortBy, i, 0);
+	}
+}
+
+int partition(vector<hospital>& list, int sortBy, int start, int end) {
+	//If sorting by cost
+	if (sortBy == 1) {
+		int pivot = list[start].returnAverage();
+		int count = 0;
+		for (int i = start + 1; i <= end; i++) {
+			if (list[i].returnAverage() <= pivot) {
+				count++;
+			}
+		}
+
+		int pivotIndex = start + count;
+		swap(list[pivotIndex], list[start]);
+
+		int i = start;
+		int j = end;
+
+		while (i < pivotIndex && j > pivotIndex) {
+			while (list[i].returnAverage() < pivot) {
+				i++;
+			}
+
+			while (list[j].returnAverage() > pivot) {
+				j--;
+			}
+
+			if (i < pivotIndex && j > pivotIndex) {
+				swap(list[i], list[j]);
+				i++;
+				j--;
+			}
+		}
+
+		return pivotIndex;
+	}
+	//If sorting by patient rating
+	if (sortBy == 2) {
+		int pivot = list[start].returnInt("overallrating");
+		int count = 0;
+		for (int i = start + 1; i <= end; i++) {
+			if (list[i].returnInt("overallrating") <= pivot) {
+				count++;
+			}
+		}
+
+		int pivotIndex = start + count;
+		swap(list[pivotIndex], list[start]);
+
+		int i = start;
+		int j = end;
+
+		while (i < pivotIndex && j > pivotIndex) {
+			while (list[i].returnInt("overallrating") < pivot) {
+				i++;
+			}
+
+			while (list[j].returnInt("overallrating") > pivot) {
+				j--;
+			}
+
+			if (i < pivotIndex && j > pivotIndex) {
+				swap(list[i], list[j]);
+				i++;
+				j--;
+			}
+		}
+
+		return pivotIndex;
+	}
+	//If sorting by timliness
+	if (sortBy == 3) {
+		int pivot = list[start].returnInt("timeliness");
+		int count = 0;
+		for (int i = start + 1; i <= end; i++) {
+			if (list[i].returnInt("timeliness") <= pivot) {
+				count++;
+			}
+		}
+
+		int pivotIndex = start + count;
+		swap(list[pivotIndex], list[start]);
+
+		int i = start;
+		int j = end;
+
+		while (i < pivotIndex && j > pivotIndex) {
+			while (list[i].returnInt("timeliness") < pivot) {
+				i++;
+			}
+
+			while (list[j].returnInt("timeliness") > pivot) {
+				j--;
+			}
+
+			if (i < pivotIndex && j > pivotIndex) {
+				swap(list[i], list[j]);
+				i++;
+				j--;
+			}
+		}
+
+		return pivotIndex;
+	}
+	//Sorting by safety
+	if (sortBy == 4) {
+		int pivot = list[start].returnInt("safety");
+		int count = 0;
+		for (int i = start + 1; i <= end; i++) {
+			if (list[i].returnInt("safety") <= pivot) {
+				count++;
+			}
+		}
+
+		int pivotIndex = start + count;
+		swap(list[pivotIndex], list[start]);
+
+		int i = start;
+		int j = end;
+
+		while (i < pivotIndex && j > pivotIndex) {
+			while (list[i].returnInt("safety") < pivot) {
+				i++;
+			}
+
+			while (list[j].returnInt("safety") > pivot) {
+				j--;
+			}
+
+			if (i < pivotIndex && j > pivotIndex) {
+				swap(list[i], list[j]);
+				i++;
+				j--;
+			}
+		}
+
+		return pivotIndex;
+	}
+}
+
+void introsortHelp(vector<hospital>& list, int sortBy, int maxDepth, int start, int end) {
+	int size = end - start;
+
+	//If the list is small, do insertion sort
+	if (size < 32) {
+		insertionSort(list, sortBy, start, end);
+		return;
+	}
+
+	//If max depth is reached, do heap sort
+	if (maxDepth == 0) {
+		heapSort(list, sortBy, start, end + 1);
+		return;
+	}
+
+	//All else fails, use quicksort
+	int partitionIndex = partition(list, sortBy, start, end);
+	introsortHelp(list, sortBy, start, partitionIndex - 1, maxDepth - 1);
+	introsortHelp(list, sortBy, partitionIndex + 1, end, maxDepth - 1);
+}
+
+void introSort(vector<hospital>& list, int sortBy) {
+	int maxDepth = 2 * log2(list.size());
+	introsortHelp(list, sortBy, maxDepth, 0, list.size() - 1);
+}
