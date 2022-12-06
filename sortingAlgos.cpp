@@ -392,7 +392,7 @@ void introsortHelp(vector<hospital>& list, int sortBy, int maxDepth, int start, 
 
 	//If max depth is reached, do heap sort
 	if (maxDepth == 0) {
-		heapSort(list, sortBy, start, end + 1);
+		heapSort(list, sortBy, start, end);
 		return;
 	}
 
