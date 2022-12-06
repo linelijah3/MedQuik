@@ -1,5 +1,3 @@
-#include "hospital.cpp"
-#include "hospitalList.cpp"
 #include <iostream>
 using namespace std;
 
@@ -127,7 +125,7 @@ void pushRandomizedHospital(hospitalList& list){
         else if (random == 3)
             facilityType += "Unknown";
         else
-            cout << "facility error??" << endl;
+            cout << "facility error" << endl;
         
         random = rand() % 6;
         // randomize overall rating
@@ -180,6 +178,5 @@ void pushRandomizedHospital(hospitalList& list){
         hipkneeCost = rand() % 30000;
         averageCost = (1.0 * (heartAttackCost + heartFailureCost + pneumoniaCost + hipkneeCost)) / 4;
 
-        list.mainList[name] = (hospital(name, city, state, facilityType, ratingOverall, timelinessRating, safetyRating, heartAttackCost, heartFailureCost, pneumoniaCost, hipkneeCost, averageCost));
-    }
+        list.mainList[name] = (hospital(name, city, state, facilityType, ratingOverall, timelinessRating, safetyRating, heartAttackCost, heartFailureCost, pneumoniaCost, hipkneeCost, averageCost));    }
 }

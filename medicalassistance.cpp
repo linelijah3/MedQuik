@@ -3,10 +3,13 @@
 #include <sstream>
 #include <fstream>
 #include <chrono>
-#include "hospital.cpp"
-#include "hospitalList.cpp"
+#include "hospitalList.h"
 #include "sortingAlgos.cpp"
+#include "randomizer.cpp"
 using namespace std;
+
+//Data set used from the CORGIS Dataset Project (https://think.cs.vt.edu/corgis/csv/hospitals/)
+//timing system used to time the sorting and other procedures from https://stackoverflow.com/questions/12231166/timing-algorithm-clock-vs-time-in-c
 
 int main() {
     hospitalList listOfHospitals;
@@ -29,9 +32,7 @@ int main() {
     if (firstSelection.compare("2")==0) {
         return 0;
     }
-    fstream file("hospitals.csv");
-
-    //timing system from https://stackoverflow.com/questions/12231166/timing-algorithm-clock-vs-time-in-c
+    ifstream file("hospitals.csv");
     auto startTime = std::chrono::high_resolution_clock::now();
     string data, placeholder;
     getline(file, placeholder);
@@ -94,7 +95,8 @@ int main() {
         listOfHospitals.setHospitalDataString(name, data2, "hipknee");
     }
     listOfHospitals.initializeAverageCosts();
-    auto t2 = std::chrono::high_resolution_clock::now();
+    pushRandomizedHospital(listOfHospitals);
+    auto endTime = std::chrono::high_resolution_clock::now();
     //calculate time taken to initially create all hospital objects in seconds
     cout << "Initial database loaded in " <<chrono::duration_cast<std::chrono::microseconds>(endTime-startTime).count() <<" microseconds." <<endl;
     bool stateSearch = true;
@@ -116,7 +118,7 @@ int main() {
                     foundState = true;
                 }
             }
-            t2 = std::chrono::high_resolution_clock::now();
+            endTime = std::chrono::high_resolution_clock::now();
             if (!foundState) {
                 cout << "Please type in a valid state name." << endl;
                 cout << "Please type a state name (2 letters, all capitalized):\n";
