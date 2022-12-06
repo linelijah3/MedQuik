@@ -5,6 +5,7 @@
 #include <chrono>
 #include "hospitalList.h"
 #include "sortingAlgos.cpp"
+#include "randomizer.cpp"
 using namespace std;
 
 int main() {
@@ -116,6 +117,8 @@ int main() {
                 }
             }
             t2 = std::chrono::high_resolution_clock::now();
+            pushRandomizedHospital(heapSortList);
+            pushRandomizedHospital(mergeSortList);
             if (!foundState) {
                 cout << "Please type in a valid state name." << endl;
                 cout << "Please type a state name (2 letters, all capitalized):\n";

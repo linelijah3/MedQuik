@@ -21,6 +21,21 @@ hospital::hospital::hospital() {
     this->ratingOverall = 0;
 //vectors are automatically empty so no need to do anything for them
 }
+hospital::hospital::hospital(string& name, string city, string state, string facilityType, int ratingOverall, int timelessRating, int safetyRating, int heartAttackCost, int heartFailureCost, int pneumoniaCost, int hipkneeCost, double averageCost) {
+    this->name = name;
+    this->number = 0;
+    this->city = city;
+    this->state = state;
+    this->facilityType = facilityType;
+    this->ratingOverall = ratingOverall;
+    this->timelinessRating = timelessRating;
+    this->safetyRating = safetyRating;
+    this->heartAttackCost = heartAttackCost;
+    this->heartFailureCost = heartFailureCost;
+    this->pneumoniaCost = pneumoniaCost;
+    this->hipkneeCost = hipkneeCost;
+    this->averageCost = averageCost;
+}
 
 void hospital::hospital::setString(string stringData, const string& category) {
     if (category=="name") {
