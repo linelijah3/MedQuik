@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-void pushRandomizedHospital(vector<hospital>& list){
+void pushRandomizedHospital(hospitalList& list){
     for (int i = 0; i < 3500; i++){
         string name = to_string(i) + " Center", city = to_string(rand() % 1000 + 1), state = "", facilityType = "";
         int number, ratingOverall, timelinessRating, safetyRating, heartAttackCost, heartFailureCost, pneumoniaCost, hipkneeCost;
@@ -114,7 +114,7 @@ void pushRandomizedHospital(vector<hospital>& list){
         else if (random == 50)
             state += "DC";
         else
-            cout << "state error!??!!?!??!" << endl;
+            cout << "state error" << endl;
     
         random = rand() % 4;
         // randomize facility type
@@ -127,7 +127,7 @@ void pushRandomizedHospital(vector<hospital>& list){
         else if (random == 3)
             facilityType += "Unknown";
         else
-            cout << "facility error!?!?!?!?!?!?!" << endl;
+            cout << "facility error??" << endl;
         
         random = rand() % 6;
         // randomize overall rating
@@ -180,6 +180,6 @@ void pushRandomizedHospital(vector<hospital>& list){
         hipkneeCost = rand() % 30000;
         averageCost = (1.0 * (heartAttackCost + heartFailureCost + pneumoniaCost + hipkneeCost)) / 4;
 
-        list.push_back(hospital(name, city, state, facilityType, ratingOverall, timelinessRating, safetyRating, heartAttackCost, heartFailureCost, pneumoniaCost, hipkneeCost, averageCost));
+        list.mainList[name] = (hospital(name, city, state, facilityType, ratingOverall, timelinessRating, safetyRating, heartAttackCost, heartFailureCost, pneumoniaCost, hipkneeCost, averageCost));
     }
 }

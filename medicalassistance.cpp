@@ -3,7 +3,8 @@
 #include <sstream>
 #include <fstream>
 #include <chrono>
-#include "hospitalList.h"
+#include "hospital.cpp"
+#include "hospitalList.cpp"
 #include "sortingAlgos.cpp"
 #include "randomizer.cpp"
 using namespace std;
@@ -94,6 +95,7 @@ int main() {
         listOfHospitals.setHospitalDataString(name, data2, "hipknee");
     }
     listOfHospitals.initializeAverageCosts();
+    pushRandomizedHospital(listOfHospitals);
     auto t2 = std::chrono::high_resolution_clock::now();
     //calculate time taken to initially create all hospital objects in seconds
     cout << "Initial database loaded in " <<chrono::duration_cast<std::chrono::microseconds>(t2-t1).count() <<" microseconds." <<endl;
@@ -117,8 +119,6 @@ int main() {
                 }
             }
             t2 = std::chrono::high_resolution_clock::now();
-            pushRandomizedHospital(heapSortList);
-            pushRandomizedHospital(mergeSortList);
             if (!foundState) {
                 cout << "Please type in a valid state name." << endl;
                 cout << "Please type a state name (2 letters, all capitalized):\n";
