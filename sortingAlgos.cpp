@@ -260,7 +260,7 @@ int partition(vector<hospital>& list, int sortBy, int start, int end) {
 		int j = end;
 
 		while (i < pivotIndex && j > pivotIndex) {
-			while (list[i].returnAverage() < pivot) {
+			while (list[i].returnAverage() <= pivot) {
 				i++;
 			}
 
