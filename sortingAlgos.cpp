@@ -245,37 +245,16 @@ void heapSort(vector<hospital>& list, int sortBy, int start, int end) {
 int partition(vector<hospital>& list, int sortBy, int start, int end) {
 	//If sorting by cost
 	if (sortBy == 1) {
-		int pivot = list[start].returnAverage();
-		int count = 0;
-		for (int i = start + 1; i <= end; i++) {
-			if (list[i].returnAverage() <= pivot) {
-				count++;
-			}
-		}
-
-		int pivotIndex = start + count;
-		swap(list[pivotIndex], list[start]);
-
-		int i = start;
-		int j = end;
-
-		while (i < pivotIndex && j > pivotIndex) {
-			while (list[i].returnAverage() <= pivot) {
-				i++;
-			}
-
-			while (list[j].returnAverage() > pivot) {
-				j--;
-			}
-
-			if (i < pivotIndex && j > pivotIndex) {
+		int pivot = list[end].returnAverage();
+		int i = start - 1;
+		for (int j = start; j < end; j++) {
+			if (list[j].returnAverage() <= pivot) {
+				j++;
 				swap(list[i], list[j]);
-				i++;
-				j--;
 			}
 		}
-
-		return pivotIndex;
+		swap(list[i + 1], list[end]);
+		return i + 1;
 	}
 	//If sorting by patient rating
 	if (sortBy == 2) {
