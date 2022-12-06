@@ -398,8 +398,8 @@ void introsortHelp(vector<hospital>& list, int sortBy, int maxDepth, int start, 
 
 	//All else fails, use quicksort
 	int partitionIndex = partition(list, sortBy, start, end);
-	introsortHelp(list, sortBy, start, partitionIndex - 1, maxDepth - 1);
-	introsortHelp(list, sortBy, partitionIndex + 1, end, maxDepth - 1);
+	introsortHelp(list, sortBy, maxDepth - 1, start, partitionIndex - 1);
+	introsortHelp(list, sortBy, maxDepth - 1, partitionIndex + 1, end);
 }
 
 void introSort(vector<hospital>& list, int sortBy) {
