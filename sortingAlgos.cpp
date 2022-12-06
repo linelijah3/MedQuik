@@ -416,3 +416,13 @@ void quicksort(vector<hospital>& list, int sortBy, int start, int end) {
 	quicksort(list, sortBy, start, pivotIndex - 1);
 	quicksort(list, sortBy, pivotIndex + 1, end);
 }
+
+void mergesort(vector<hospital>& list, int sortBy, int start, int end) {
+	if (start >= end) {
+		return;
+	}
+	int middle = start + (end - start) / 2;
+	mergesort(list, sortBy, start, middle);
+	mergesort(list, sortBy, middle + 1, end);
+	merge(list, start, middle, end, sortBy);
+}
