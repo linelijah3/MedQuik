@@ -6,7 +6,6 @@
 #include "hospital.cpp"
 #include "hospitalList.cpp"
 #include "sortingAlgos.cpp"
-#include "randomizer.cpp"
 using namespace std;
 
 int main() {
@@ -33,7 +32,7 @@ int main() {
     fstream file("hospitals.csv");
 
     //timing system from https://stackoverflow.com/questions/12231166/timing-algorithm-clock-vs-time-in-c
-    auto t1 = std::chrono::high_resolution_clock::now();
+    auto startTime = std::chrono::high_resolution_clock::now();
     string data, placeholder;
     getline(file, placeholder);
     while (getline(file, data)) {
@@ -95,10 +94,9 @@ int main() {
         listOfHospitals.setHospitalDataString(name, data2, "hipknee");
     }
     listOfHospitals.initializeAverageCosts();
-    pushRandomizedHospital(listOfHospitals);
     auto t2 = std::chrono::high_resolution_clock::now();
     //calculate time taken to initially create all hospital objects in seconds
-    cout << "Initial database loaded in " <<chrono::duration_cast<std::chrono::microseconds>(t2-t1).count() <<" microseconds." <<endl;
+    cout << "Initial database loaded in " <<chrono::duration_cast<std::chrono::microseconds>(endTime-startTime).count() <<" microseconds." <<endl;
     bool stateSearch = true;
     while (stateSearch) {
         cout << "---------------------------------------------\n";
@@ -110,7 +108,7 @@ int main() {
         vector<hospital> mergeSortList;
         bool foundState = false;
         while (!foundState) {
-            t1 = std::chrono::high_resolution_clock::now();
+            startTime = std::chrono::high_resolution_clock::now();
             for (auto &i: listOfHospitals.mainList) {
                 if (i.second.returnString("state") == stateName) {
                     heapSortList.push_back(i.second);
@@ -126,7 +124,7 @@ int main() {
             }
         }
         cout << "The state being searched is: " << stateName << endl;
-        cout << "State-specific lists loaded in " << chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count()
+        cout << "State-specific lists loaded in " << chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count()
              << " microseconds." << endl;
         cout << "---------------------------------------------\n";
         cout << "Which of these criteria is important to you?\n"
@@ -146,14 +144,14 @@ int main() {
             }
             cout << "Invalid option." << endl;
         }
-        t1 = std::chrono::high_resolution_clock::now();
+        startTime = std::chrono::high_resolution_clock::now();
         heapSort(heapSortList, stoi(secondSelection), 0, heapSortList.size());
-        t2 = std::chrono::high_resolution_clock::now();
-        auto heapSortTime = chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
-        t1 = std::chrono::high_resolution_clock::now();
+        endTime = std::chrono::high_resolution_clock::now();
+        auto heapSortTime = chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count();
+        startTime = std::chrono::high_resolution_clock::now();
         mergesort(mergeSortList, stoi(secondSelection), 0, mergeSortList.size()-1);
-        t2 = std::chrono::high_resolution_clock::now();
-        auto mergeSortTime = chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+        endTime = std::chrono::high_resolution_clock::now();
+        auto mergeSortTime = chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count();
         cout << "Heap sort took " << heapSortTime << " microseconds to sort the vector." << endl;
         cout << "Merge Sort took " << mergeSortTime << " microseconds to sort the vector." << endl;
         cout << "The first 10 hospitals from the sorted list are:" << endl;
