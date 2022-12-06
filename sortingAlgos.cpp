@@ -260,7 +260,7 @@ int partition(vector<hospital>& list, int sortBy, int start, int end) {
 		int j = end;
 
 		while (i < pivotIndex && j > pivotIndex) {
-			while (list[i].returnAverage() < pivot) {
+			while (list[i].returnAverage() <= pivot) {
 				i++;
 			}
 
@@ -294,7 +294,7 @@ int partition(vector<hospital>& list, int sortBy, int start, int end) {
 		int j = end;
 
 		while (i < pivotIndex && j > pivotIndex) {
-			while (list[i].returnInt("overallrating") < pivot) {
+			while (list[i].returnInt("overallrating") <= pivot) {
 				i++;
 			}
 
@@ -328,7 +328,7 @@ int partition(vector<hospital>& list, int sortBy, int start, int end) {
 		int j = end;
 
 		while (i < pivotIndex && j > pivotIndex) {
-			while (list[i].returnInt("timeliness") < pivot) {
+			while (list[i].returnInt("timeliness") <= pivot) {
 				i++;
 			}
 
@@ -362,7 +362,7 @@ int partition(vector<hospital>& list, int sortBy, int start, int end) {
 		int j = end;
 
 		while (i < pivotIndex && j > pivotIndex) {
-			while (list[i].returnInt("safety") < pivot) {
+			while (list[i].returnInt("safety") <= pivot) {
 				i++;
 			}
 
