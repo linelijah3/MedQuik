@@ -3,14 +3,14 @@
 #include <sstream>
 #include <fstream>
 #include <chrono>
-#include "hospitalList.h"
+#include "hospitalList.cpp"
 #include "sortingAlgos.cpp"
 using namespace std;
 
 int main() {
     hospitalList listOfHospitals;
     bool valid = false;
-    int firstSelection, secondSelection;
+    string firstSelection, secondSelection;
     cout << "Welcome to Medical Assistance's Care Rec Tool\n"
             "---------------------------------------------\n"
             "1) Print Database\n"
@@ -19,13 +19,13 @@ int main() {
     while (!valid) {
         cout << "Please select an option:" << endl;
         cin >> firstSelection;
-        if (to_string(firstSelection).compare("1")==0||to_string(firstSelection).compare("2")==0) {
+        if (firstSelection.compare("1")==0||firstSelection.compare("2")==0) {
             valid = true;
             break;
         }
         cout << "Invalid option."<<endl;
     }
-    if (to_string(firstSelection).compare("2")==0) {
+    if (firstSelection.compare("2")==0) {
         return 0;
     }
     fstream file("hospitals.csv");
@@ -101,13 +101,14 @@ int main() {
     string stateName;
     cin >> stateName;
     //do something with searching + placing
-    vector<hospital> stateList;
+    vector<hospital> timSortList;
+    vector<hospital> otherList;
     bool foundState = false;
     while (!foundState) {
         t1 = std::chrono::high_resolution_clock::now();
         for (auto &i : listOfHospitals.mainList) {
             if (i.second.returnString("state") == stateName) {
-                stateList.push_back(i.second);
+                timSortList.push_back(i.second);
                 foundState = true;
             }
         }
@@ -119,7 +120,7 @@ int main() {
         }
     }
     cout << "The state being searched is: " << stateName << endl;
-    cout << "State-specific list loaded in " <<chrono::duration_cast<std::chrono::microseconds>(t2-t1).count() <<" microseconds." <<endl;
+    cout << "State-specific lists loaded in " <<chrono::duration_cast<std::chrono::microseconds>(t2-t1).count() <<" microseconds." <<endl;
     cout << "---------------------------------------------\n";
     cout << "Which of these criteria is important to you?\n"
             "1) Cost of Care\n"
@@ -131,14 +132,44 @@ int main() {
     valid = false;
     while (!valid) {
         cin >> secondSelection;
-        if (to_string(secondSelection).compare("1")==0||to_string(secondSelection).compare("2")==0||to_string(secondSelection).compare("3")==0||to_string(secondSelection).compare("4")==0) {
+        if (secondSelection.compare("1")==0||secondSelection.compare("2")==0||secondSelection.compare("3")==0||secondSelection.compare("4")==0) {
             valid = true;
             break;
         }
         cout << "Invalid option."<<endl;
     }
     t1 = std::chrono::high_resolution_clock::now();
-    timsort(stateList, secondSelection);
+    timsort(timSortList, stoi(secondSelection));
     t2 = std::chrono::high_resolution_clock::now();
     cout << "Timsort took " << chrono::duration_cast<std::chrono::microseconds>(t2-t1).count() << " microseconds to sort the vector." << endl;
+    cout << "The first 10 hospitals from the sorted list are:" <<endl;
+    for (int i = 0; i < 10; i++) {
+        cout << i+1<<": "<<timSortList[i].returnString("name") << endl;
+    }
+    cout << "Choose a hospital to look at from the list:" << endl;
+    valid = false;
+    while (!valid) {
+        cin >> secondSelection;
+        for (int i = 0; i < timSortList.size(); i++) {
+            if (secondSelection.compare(""+to_string(i))==0) {
+                valid = true;
+                break;
+            }
+        }
+        if (!valid) {
+            cout << "Invalid number."<<endl;
+        }
+    }
+    cout << "Name of hospital: " << timSortList[stoi(secondSelection)].returnString("name") << endl;
+    cout << "State hospital is located in: "<<timSortList[stoi(secondSelection)].returnString("state") << endl;
+    cout << "City hospital is located in: "<<timSortList[stoi(secondSelection)].returnString("city") << endl;
+    cout << "Facility type of hospital: "<<timSortList[stoi(secondSelection)].returnString("facility") << endl;
+    cout << "Overall rating of hospital: " <<timSortList[stoi(secondSelection)].returnInt("overallrating")<<endl;
+    cout << "Timeliness rating of hospital: " <<timSortList[stoi(secondSelection)].returnInt("timeliness")<<endl;
+    cout << "Safety rating of hospital: " <<timSortList[stoi(secondSelection)].returnInt("safety")<<endl;
+    cout << "Hospital's cost of care for heart attacks: " <<timSortList[stoi(secondSelection)].returnInt("heartattack")<<endl;
+    cout << "Hospital's cost of care for heart failure: " <<timSortList[stoi(secondSelection)].returnInt("heartfailure")<<endl;
+    cout << "Hospital's cost of care for pneumonia: " <<timSortList[stoi(secondSelection)].returnInt("pneumonia")<<endl;
+    cout << "Hospital's cost of care for hip/knee conditions: " <<timSortList[stoi(secondSelection)].returnInt("hipknee")<<endl;
+    cout << "Hospital's average cost of care: " <<timSortList[stoi(secondSelection)].returnAverage()<<endl;
 }
