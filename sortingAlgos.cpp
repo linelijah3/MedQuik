@@ -5,7 +5,7 @@
 using namespace std;
 
 void insertionSort(vector<hospital> &list, int sortBy, int start, int end) {
-	for (int i = start; i < end; i++) {
+	for (int i = start + 1; i <= end; i++) {
 		int j = i - 1;
 		int key = 0;
         hospital keyHospital = list[i];
@@ -66,7 +66,7 @@ void merge(vector<hospital>& list, int left, int middle, int right, int sortBy) 
 	//Merge by average cost
 	if (sortBy == 1) {
 		while (l < lengthLeft && r < lengthRight) {
-			if (leftList[l].returnAverage() < rightList[r].returnAverage()) {
+			if (leftList[l].returnAverage() <= rightList[r].returnAverage()) {
 				list[main] = leftList[l];
 				l++;
 			}
