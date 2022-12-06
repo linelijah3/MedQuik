@@ -3,7 +3,8 @@
 #include <sstream>
 #include <fstream>
 #include <chrono>
-#include "hospitalList.h"
+#include "hospital.cpp"
+#include "hospitalList.cpp"
 #include "sortingAlgos.cpp"
 using namespace std;
 
