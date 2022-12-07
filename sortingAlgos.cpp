@@ -58,7 +58,7 @@ void merge(vector<hospital>& list, int left, int middle, int right, int sortBy) 
 	for (int i = 0; i < lengthLeft; i++) {
 		leftList[i] = list[left + i];
 	}
-	for (int i = 1; i <= lengthRight; i++) {
+	for (int i = 1; i < lengthRight - 1; i++) {
 		rightList[i] = list[middle + i];
 	}
 
