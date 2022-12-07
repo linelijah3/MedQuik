@@ -58,8 +58,8 @@ void merge(vector<hospital>& list, int left, int middle, int right, int sortBy) 
 	for (int i = 0; i < lengthLeft; i++) {
 		leftList[i] = list[left + i];
 	}
-	for (int i = 0; i < lengthRight; i++) {
-		rightList[i] = list[middle + 1 + i];
+	for (int i = 1; i <= lengthRight; i++) {
+		rightList[i] = list[middle + i];
 	}
 
 	int l = 0;
@@ -68,56 +68,48 @@ void merge(vector<hospital>& list, int left, int middle, int right, int sortBy) 
 
 	//Merge by average cost
 	if (sortBy == 1) {
-		while (l < lengthLeft && r < lengthRight) {
+		while (l < lengthLeft and r < lengthRight) {
 			if (leftList[l].returnAverage() <= rightList[r].returnAverage()) {
-				list[main] = leftList[l];
-				l++;
+				list[main] = leftList[l++];
 			}
 			else {
-				list[main] = rightList[r];
-				r++;
+				list[main] = rightList[r++];
 			}
 			main++;
 		}
 	}
 	//Merge by patient ratings
 	else if (sortBy == 2) {
-		while (l < lengthLeft && r < lengthRight) {
+		while (l < lengthLeft and r < lengthRight) {
 			if (leftList[l].returnInt("overallrating") < rightList[r].returnInt("overallrating")) {
-				list[main] = leftList[l];
-				l++;
+				list[main] = leftList[l++];
 			}
 			else {
-				list[main] = rightList[r];
-				r++;
+				list[main] = rightList[r++];
 			}
 			main++;
 		}
 	}
 	//Merge by timeliness
 	else if (sortBy == 3) {
-		while (l < lengthLeft && r < lengthRight) {
+		while (l < lengthLeft and r < lengthRight) {
 			if (leftList[l].returnInt("timeliness") < rightList[r].returnInt("timeliness")) {
-				list[main] = leftList[l];
-				l++;
+				list[main] = leftList[l++];
 			}
 			else {
-				list[main] = rightList[r];
-				r++;
+				list[main] = rightList[r++];
 			}
 			main++;
 		}
 	}
 	//Merge by safety
 	else if (sortBy == 4) {
-		while (l < lengthLeft && r < lengthRight) {
+		while (l < lengthLeft and r < lengthRight) {
 			if (leftList[l].returnInt("safety") < rightList[r].returnInt("safety")) {
-				list[main] = leftList[l];
-				l++;
+				list[main] = leftList[l++];
 			}
 			else {
-				list[main] = rightList[r];
-				r++;
+				list[main] = rightList[r++];
 			}
 			main++;
 		}
